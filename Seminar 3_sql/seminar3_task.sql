@@ -30,23 +30,25 @@ VALUES
 ('Юрий', 'Галкин', 'Рабочий', '3', 12000, 24),
 ('Людмила', 'Маркина', 'Уборщик', '10', 10000, 49);
 
--- 1. Отсортируйте данные по полю заработная плата (salary) в порядке: убывания; возрастания
+-- 1. Отсортируйте данные по полю заработная плата (salary) в порядке: возрастания
 SELECT * FROM staff ORDER BY salary;
+
+-- 2. Отсортируйте данные по полю заработная плата (salary) в порядке: убывания;
 SELECT * FROM staff ORDER BY salary DESC;
 
--- 2. Выведите 5 максимальных заработных плат (salary)
+-- 3. Выведите 5 максимальных заработных плат (salary)
 SELECT * FROM staff ORDER BY salary DESC
 LIMIT 5;
 
--- 3. Посчитайте суммарную зарплату (salary) по каждой специальности (роst)
+-- 4. Посчитайте суммарную зарплату (salary) по каждой специальности (роst)
 SELECT post, SUM(salary) AS total_salary FROM staff GROUP BY post;
 
--- 4. Найдите кол-во сотрудников с специальностью (post) «Рабочий» в возрасте от 24 до 49 лет включительно.
+-- 5. Найдите кол-во сотрудников с специальностью (post) «Рабочий» в возрасте от 24 до 49 лет включительно.
 SELECT COUNT(*) AS count FROM staff WHERE post = 'Рабочий' AND age BETWEEN 24 AND 49; 
 
--- 5.Найдите количество специальностей
+-- 6.Найдите количество специальностей
 SELECT COUNT(*) AS count FROM (SELECT DISTINCT post FROM staff) sub;
 
--- 6. Выведите специальности, у которых средний возраст сотрудников меньше 30 лет
+-- 7. Выведите специальности, у которых средний возраст сотрудников меньше 30 лет
 SELECT post, ROUND(AVG(age), 1) AS middle_age FROM staff GROUP BY post;
-SELECT post, ROUND(AVG(age), 1) AS middle_age FROM staff GROUP BY post HAVING middle_age < 30;
+SELECT post, ROUND(AVG(age), 1) AS middle_age FROM staff GROUP BY post HAVING middle_age < 40;
